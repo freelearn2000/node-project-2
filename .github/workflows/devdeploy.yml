@@ -2,8 +2,8 @@ on:
   schedule:
   - cron : '30 5,17 * * *'
   branches:
-     - development
-     env:
+  - development
+env:
   AZURE_WEBAPP_NAME: stagingtestapp                                    # set this to your application's name
   AZURE_WEBAPP_URL: 'https://stagingtestapp.azurewebsites.net'          # set application url
   AZURE_WEBAPP_PACKAGE_PATH: '.'                                    # set this to the path to your web app project, defaults to the repository root
