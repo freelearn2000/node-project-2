@@ -1,8 +1,9 @@
 on:
   schedule:
-  - cron : '30 5,17 * * *'
-  branches:
-  - development
+   - cron : '30 5,17 * * *'
+  branches: [ development ]
+
+  
 env:
   AZURE_WEBAPP_NAME: stagingtestapp                                    # set this to your application's name
   AZURE_WEBAPP_URL: 'https://stagingtestapp.azurewebsites.net'          # set application url
