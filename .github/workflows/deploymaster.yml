@@ -23,7 +23,7 @@ jobs:
     - name: Login to Azure WebApp
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIAL_SP }}
+        creds: ${{ secrets.AZURE_CREDENTIALs }}
     
     - name: Setup Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
