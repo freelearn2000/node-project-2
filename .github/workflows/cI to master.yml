@@ -1,0 +1,30 @@
+name: merging develop to master
+
+on:
+  pull_request:
+    branches: [master]
+    
+env:
+  NODE_VERSION: '14.x'                           # set this to the node version to use
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+    - name: Checkout master from repository
+      uses: actions/checkout@master
+    
+    - name: Setup Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+       node-version: ${{ env.NODE_VERSION }}
+
+    - name: Run npm install, compile
+      run: |
+        # Build and compile the project
+        npm install
+        npm run compile
+      
