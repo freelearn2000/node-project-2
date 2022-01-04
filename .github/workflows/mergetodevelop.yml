@@ -13,7 +13,7 @@ jobs:
   build:
     name: Build 
     runs-on: ubuntu-latest
-    environment: dev
+    environment: develop
 
     steps:
     - name: Checkout master from repository
