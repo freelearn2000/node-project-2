@@ -35,26 +35,14 @@ jobs:
         # Build and compile the project
         npm install
         npm run compile
+        
+    - name: 'Build project'
+      if:  github.event_name -- 'push'
+      run: echo "Build the project"
       
-    - name: Deploy to Azure WebApp
-      uses: azure/webapps-deploy@v1
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
-    - name: Logout from Azure
-      run: |
-        az logout
-    - name: Check the Azure WebApp is running successfully
-      uses: jtalk/url-health-check-action@v2
-      with:
-        # Check the following URLs one by one sequentially
-        url: ${{ env.AZURE_WEBAPP_URL }}
-        # Follow redirects, or just report success on 3xx status codes
-        follow-redirect: false # Optional, defaults to "false"
-        # Fail this action after this many failed attempts
-        max-attempts: 3 # Optional, defaults to 1
-        # Delay between retries
-        retry-delay: 5s # Optional, only applicable to max-attempts > 1
-        # Retry all errors, including 404. This option might trigger curl upgrade.
-        retry-all: false # Optional, defaults to "false"
+    - name: 'Deploy to Staging Server'
+      if: github.event_name --'push'
+      run: echo "Deploy the project"
+   
+      
+   
