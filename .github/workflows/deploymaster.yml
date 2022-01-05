@@ -20,10 +20,10 @@ jobs:
     - name: Checkout master from repository
       uses: actions/checkout@master
 
-    - name: Login to Azure WebApp
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALs }}
+    ##- name: Login to Azure WebApp
+    ##uses: azure/login@v1
+    ##with:
+    ##creds: ${{ secrets.AZURE_CREDENTIALs }}
     
     - name: Setup Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
