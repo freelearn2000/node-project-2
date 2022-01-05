@@ -37,11 +37,11 @@ jobs:
         npm run compile
         
     - name: 'Build project'
-      if:  github.event_name -- 'push'
+      if:  github.event_name -'push'
       run: echo "Build the project"
       
     - name: 'Deploy to Staging Server'
-      if: github.event_name --'push'
+      if: github.event_name -'push'
       run: echo "Deploy the project"
    
       
