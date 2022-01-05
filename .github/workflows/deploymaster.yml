@@ -37,11 +37,11 @@ jobs:
         npm run compile
         
     - name: 'Build project'
-      if: github.event_name != "workflow_dispatch"
+      if: github.event_name != 'workflow_dispatch'
       run: echo "Build the project"
       
     - name: 'Deploy to Staging Server'
-      if: github.event_name != "workflow_dispatch"
+      if: github.event_name != 'workflow_dispatch'
       run: echo "Deploy the project"
    
       
