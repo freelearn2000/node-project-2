@@ -37,4 +37,4 @@ jobs:
       
     - name: 'Deploy to Staging Server'
       if: github.event_name != 'push'
-      run: echo "Deploy the project"
+      run: echo "Deploy the project "
