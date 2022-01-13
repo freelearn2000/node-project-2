@@ -1,7 +1,10 @@
-name: Build and Deploy [production]
+name: CI Staging
 
 on:
-  [workflow_dispatch]
+  pull_requests:
+    branches: [develop]
+  push:
+    branches: [develop]
   
   
 env:
@@ -12,21 +15,24 @@ env:
 
 jobs:
   build-and-deploy:
-    name: Build and Deploy
+    name: Build and Deploy to Staging
     runs-on: ubuntu-latest
     environment: production
 
     steps:
-    - name: Checkout master from repository
-      uses: actions/checkout@master
+    - name: Checkout from repository
+      uses: actions/checkout@v2
 
-    ##- name: Login to Azure WebApp
-    ##uses: azure/login@v1
-    ##with:
-    ##creds: ${{ secrets.AZURE_CREDENTIALs }}
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     
     - name: Setup Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
        node-version: ${{ env.NODE_VERSION }}
 
