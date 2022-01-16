@@ -42,10 +42,17 @@ jobs:
         npm install
         npm run compile
         
-    - name: 'Build project'
+    - name: Build project
       if: github.event_name == 'push'
       run: echo "Build the project"
+
+    - name: Upload Build folder as Artifact
+      if: github.event_name == 'push'
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: build
       
-    - name: 'Deploy to Production Server'
+    - name: Deploy to Production Server
       if: github.event_name == 'push'
       run: echo "Deploy the project"
