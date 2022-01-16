@@ -1,7 +1,6 @@
 name: Build and Deploy [production]
 
-on:
-  [workflow_dispatch]
+on: [workflow_dispatch]
   
   
 env:
@@ -45,9 +44,9 @@ jobs:
         npm run compile
         
     - name: 'Build project'
-      if: github.event_name != 'push'
+      if: github.event_name == 'push'
       run: echo "Build the project"
       
     - name: 'Deploy to Production Server'
-      if: github.event_name != 'push'
+      if: github.event_name == 'push'
       run: echo "Deploy the project"
