@@ -41,6 +41,24 @@ jobs:
         # Build and compile the project
         npm install
         npm run compile
+
+    - name: Code Analysis
+      run: echo "Do code analysis here..."
+
+    # - name: Upload Test coverage as Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: codeanalysis_coverage
+    #     path: codecoverage
+
+    - name: Run Tests
+      run: echo "Run tests here..."
+
+    # - name: Upload Test coverage as Artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: test_coverage
+    #     path: testcoverage
         
     - name: Build project
       if: github.event_name == 'push'
