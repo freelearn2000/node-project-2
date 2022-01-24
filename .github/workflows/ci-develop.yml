@@ -1,26 +1,25 @@
-name: CI Staging
+name: CI
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, master]
   push:
-    branches: [develop]
+    branches: [develop, master]
   
   
 env:
-  AZURE_WEBAPP_NAME: masterdeploy                                  # set this to your application's name
-  AZURE_WEBAPP_URL: https://masterdeploy.azurewebsites.net         # set application url
+  AZURE_WEBAPP_NAME: stagingdeploy                                 # set this to your application's name
+  AZURE_WEBAPP_URL: https://stagingdeploy.azurewebsites.net         # set application url
   AZURE_WEBAPP_PACKAGE_PATH: '.'                                   # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '14.x'                                             # set this to the node version to use
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy to Staging
+  build:
     runs-on: ubuntu-latest
-    environment: production
+    # environment: production
 
     steps:
-    - name: Checkout from repository
+    - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Cache dependencies
@@ -36,41 +35,50 @@ jobs:
       with:
        node-version: ${{ env.NODE_VERSION }}
 
-    - name: Run npm install, compile
-      run: |
-        # Build and compile the project
-        npm install
-        npm run compile
+    - name: Install dependencies
+      run: npm ci
 
-    - name: Code Analysis
+    - name: Do Code Analysis
       run: echo "Do code analysis here..."
 
-    # - name: Upload Test coverage as Artifact
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: codeanalysis_coverage
-    #     path: codecoverage
+    - name: Upload Code coverage as Artifact
+      # uses: actions/upload-artifact@v2
+      # with:
+      #   name: codeanalysis_coverage
+      #   path: codecoverage
+      run: echo "Upload code analysis coverage here..."
 
     - name: Run Tests
       run: echo "Run tests here..."
 
-    # - name: Upload Test coverage as Artifact
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: test_coverage
-    #     path: testcoverage
+    - name: Upload Test coverage as Artifact
+      # uses: actions/upload-artifact@v2
+      # with:
+      #   name: test_coverage
+      #   path: testcoverage
+      run: echo "Upload test coverage here..."
         
     - name: Build project
       if: github.event_name == 'push'
-      run: echo "Build the project"
+      run: echo "Build the project here..."
 
     - name: Upload Build folder as Artifact
       if: github.event_name == 'push'
       uses: actions/upload-artifact@v2
       with:
-        name: build
+        name: Build
         path: build
-      
+
+    - name: Create a Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: npx semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.SEMANTIC_TOKEN }}
+
+    - name: Deploy to Staging Server
+      if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+      run: echo "Deploy build to staging here..."
+
     - name: Deploy to Production Server
-      if: github.event_name == 'push'
-      run: echo "Deploy the project"
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: echo "Deploy build to production here..."
