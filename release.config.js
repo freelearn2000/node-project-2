@@ -1,6 +1,6 @@
 module.exports = {
     branches: "master",
-    repositoryUrl: "https://github.com/freelearn2000/node-project-2.git",
+    repositoryUrl: "https://github.com/freelearn2000/node-project-2",
     plugins: [
         '@semantic-release/commit-analyzer',
         '@semantic-release/release-notes-generator',
