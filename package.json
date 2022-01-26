@@ -1,7 +1,7 @@
 {
-  "name": "node-project1",
+  "name": "node-project2",
   "version": "1.0.0",
-  "description": "Node Project 1",
+  "description": "Node Project 2",
   "main": "server.js",
   "scripts": {
     "init": "tsc --init",
@@ -26,6 +26,7 @@
     "njwt": "1.1.0",
     "pg": "8.7.1",
     "run": "1.4.0",
+    "semantic-release": "^19.0.2",
     "ts-node-dev": "1.1.8",
     "typeorm": "0.2.37",
     "typescript": "4.4.2",
