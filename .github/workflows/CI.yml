@@ -39,7 +39,7 @@ jobs:
       run: npm ci
 
     - name: Do Code Analysis
-      run: echo "Do code analysis here..."
+      run: echo "Do code analysis here"
 
     - name: Upload Code coverage as Artifact
       # uses: actions/upload-artifact@v2
